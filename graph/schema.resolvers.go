@@ -6,6 +6,8 @@ package graph
 
 import (
 	"context"
+	"encoding/json"
+	"fmt"
 
 	"github.com/brenomachadodomonte/fullcycle-go-graphql/graph/model"
 )
@@ -19,13 +21,15 @@ func (r *categoryResolver) Courses(ctx context.Context, obj *model.Category) ([]
 	}
 
 	var coursesModel []*model.Course
-	for _, course := range courses {
+	for i := range courses {
 		coursesModel = append(coursesModel, &model.Course{
-			ID:          course.ID,
-			Name:        course.Name,
-			Description: &course.Description,
+			ID:          courses[i].ID,
+			Name:        courses[i].Name,
+			Description: &courses[i].Description,
 		})
 	}
+
+	fmt.Println(json.Marshal(coursesModel))
 
 	return coursesModel, nil
 }
@@ -82,11 +86,11 @@ func (r *queryResolver) Categories(ctx context.Context) ([]*model.Category, erro
 	}
 
 	var categoriesModel []*model.Category
-	for _, category := range categories {
+	for i := range categories {
 		categoriesModel = append(categoriesModel, &model.Category{
-			ID:          category.ID,
-			Name:        category.Name,
-			Description: &category.Description,
+			ID:          categories[i].ID,
+			Name:        categories[i].Name,
+			Description: &categories[i].Description,
 		})
 	}
 
@@ -102,11 +106,11 @@ func (r *queryResolver) Courses(ctx context.Context) ([]*model.Course, error) {
 	}
 
 	var coursesModel []*model.Course
-	for _, course := range courses {
+	for i := range courses {
 		coursesModel = append(coursesModel, &model.Course{
-			ID:          course.ID,
-			Name:        course.Name,
-			Description: &course.Description,
+			ID:          courses[i].ID,
+			Name:        courses[i].Name,
+			Description: &courses[i].Description,
 		})
 	}
 
